@@ -125,7 +125,7 @@
         masterGain.gain.value = 0;
 
         // init LFO
-        lfo.frequency.value = 0; // 2Hz
+        lfo.frequency.value = 0; // LFO is off
 
         // filter playground
         var filter = window.filter = actx.createBiquadFilter();
@@ -136,9 +136,11 @@
         //
         // wire up signal path
         //
-        lfo.connect(filter.frequency);
+
         osc1.connect(filter);
         filter.connect(masterGain);
+        // osc1.connect(masterGain);
+
         masterGain.connect(panner);
         panner.connect(analyzer);
         analyzer.connect(actx.destination);
@@ -207,7 +209,7 @@
         var filt1Cutoff = document.getElementById("filter1-cutoff");
         var filter1TypeRadios = document.querySelectorAll("[name='filter1-type']");
         var attackTime = 0; // in seconds
-        var decayTime = 5; // in seconds
+        // var decayTime = 5; // in seconds
         var releaseTime = 0; // in seconds
 
         // On keypress
