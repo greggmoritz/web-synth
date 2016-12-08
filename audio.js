@@ -197,12 +197,18 @@
     function initListeners () {
         var osc1Form = document.getElementById("osc1");
         var masterGainControl = document.getElementById("osc1-gain");
+        var attackControl = document.getElementById("osc1-attack");
+        var decayControl = document.getElementById("osc1-decay");
+        var releaseControl = document.getElementById("osc1-release");
         var osc1WaveformRadios = document.querySelectorAll("[name='osc1-waveform']");
         var lfoFreqControl = document.getElementById("lfo-freq");
         var lfoWaveformRadios = document.querySelectorAll("[name='lfo-waveform']");
         var lfoParamRadios = document.querySelectorAll("[name='lfo-param']");
         var filt1Cutoff = document.getElementById("filter1-cutoff");
         var filter1TypeRadios = document.querySelectorAll("[name='filter1-type']");
+        var attackTime = 0; // in seconds
+        var decayTime = 5; // in seconds
+        var releaseTime = 0; // in seconds
 
         // On keypress
         // H
@@ -214,7 +220,11 @@
             if (Object.keys(keysToNotes).includes(key)) {
                 numberOfKeysPressed++;
                 var noteName = keysToNotes[key];
-                masterGain.gain.value = currentGain;
+                masterGain.gain.setValueAtTime(0, actx.currentTime);
+                masterGain.gain.cancelScheduledValues(actx.currentTime);
+                masterGain.gain.linearRampToValueAtTime(currentGain, actx.currentTime + attackTime);
+                // handle decay
+                // masterGain.gain.linearRampToValueAtTime(0, actx.currentTime + attackTime + decayTime);
                 osc1.frequency.value = notesToHz[noteName];
             }
         };
@@ -223,7 +233,9 @@
             if (Object.keys(keysToNotes).includes(key)) {
                 numberOfKeysPressed--;
                 if (numberOfKeysPressed < 1) {
-                    masterGain.gain.value = 0;
+                    // masterGain.gain.value = 0;
+                    masterGain.gain.cancelScheduledValues(actx.currentTime);
+                    masterGain.gain.linearRampToValueAtTime(0, actx.currentTime + releaseTime);
                 }
             }
         };
@@ -240,6 +252,23 @@
                 osc1.type = event.target.value;
             }
         });
+
+        attackControl.oninput = function (event) {
+            // cast from string to number
+            attackTime = +event.target.value;
+        };
+
+        decayControl.oninput = function (event) {
+            // cast from string to number
+            // attackTime + delay
+            delayTime = +event.target.value;
+
+        };
+
+        releaseControl.oninput = function (event) {
+            // cast from string to number
+            releaseTime = +event.target.value;
+        };
 
         lfoFreqControl.oninput = function (event) {
             lfo.frequency.value = event.target.value;

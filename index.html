@@ -23,6 +23,29 @@
                     <br /><label><input type="radio" name="osc1-waveform" value="sawtooth"> Sawtooth</label>
                     <br /><label><input type="radio" name="osc1-waveform" value="triangle"> Triangle</label>
                 </section>
+                <section>
+                    <h4>Envelope</h4>
+                    <b>A</b> 0s <input id="osc1-attack" type="range" min="0" max="1" step="0.01" value="0" /> 1s
+                    <br /><b>D</b> 0s <input id="osc1-decay" type="range" min="0" max="5" step="0.01" value="5" disabled="disabled" /> 5s
+                    <br /><b>R</b> 0s <input id="osc1-release" type="range" min="0" max="1" step="0.01" value="0" /> 1s
+                </section>
+            </fieldset>
+            <fieldset>
+                <h2>Filter</h2>
+                <section>
+                    <h4>Filter Type</h4>
+                    <label><input type="radio" name="filter1-type" value="lowpass" checked="checked"> Lowpass</label>
+                    <br /><label><input type="radio" name="filter1-type" value="highpass"> Highpass</label>
+                    <br /><label><input type="radio" name="filter1-type" value="bandpass"> Bandpass</label>
+                    <!-- <br /><label><input type="radio" name="filter1-type" value="lowshelf"> lowshelf</label>
+                    <br /><label><input type="radio" name="filter1-type" value="highshelf"> Highshelf</label>
+                    <br /><label><input type="radio" name="filter1-type" value="peaking"> Peaking</label>
+                    <br /><label><input type="radio" name="filter1-type" value="notch"> Notch</label>
+                    <br /><label><input type="radio" name="filter1-type" value="allpass"> Allpass</label> -->
+                </section>
+
+                <h4>Cutoff Frequency</h4>
+                0Hz <input id="filter1-cutoff" type="range" min="0" max="20000" value="350" /> 20kHz
             </fieldset>
             <fieldset>
                 <h2>LFO</h2>
@@ -41,23 +64,6 @@
                 <br /><label><input type="radio" name="lfo-waveform" value="square"> Square</label>
                 <br /><label><input type="radio" name="lfo-waveform" value="sawtooth"> Sawtooth</label>
                 <br /><label><input type="radio" name="lfo-waveform" value="triangle"> Triangle</label>
-            </fieldset>
-            <fieldset>
-                <h2>Filter</h2>
-                <section>
-                    <h4>Filter Type</h4>
-                    <label><input type="radio" name="filter1-type" value="lowpass" checked="checked"> Lowpass</label>
-                    <br /><label><input type="radio" name="filter1-type" value="highpass"> Highpass</label>
-                    <br /><label><input type="radio" name="filter1-type" value="bandpass"> Bandpass</label>
-                    <!-- <br /><label><input type="radio" name="filter1-type" value="lowshelf"> lowshelf</label>
-                    <br /><label><input type="radio" name="filter1-type" value="highshelf"> Highshelf</label>
-                    <br /><label><input type="radio" name="filter1-type" value="peaking"> Peaking</label>
-                    <br /><label><input type="radio" name="filter1-type" value="notch"> Notch</label>
-                    <br /><label><input type="radio" name="filter1-type" value="allpass"> Allpass</label> -->
-                </section>
-
-                <h4>Cutoff Frequency</h4>
-                0Hz <input id="filter1-cutoff" type="range" min="0" max="20000" value="350" /> 20kHz
             </fieldset>
             <fieldset>
                 <h2>Visualization</h2>
